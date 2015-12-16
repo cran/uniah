@@ -1,0 +1,16 @@
+importFrom("stats", "model.response", "model.matrix", "model.frame", "runif")
+importFrom("graphics", "plot", "points", "legend")
+importFrom("survival", "Surv", "is.Surv")
+importFrom("ahaz", "ahaz")
+importFrom("Iso", "pava")
+
+export(uniah, uniah)
+
+S3method(print, uniah, print.uniah)
+S3method(plot, uniah, plot.uniah)
+
+
+
+
+
+
