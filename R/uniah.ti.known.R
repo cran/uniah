@@ -66,7 +66,7 @@ uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxiter, eps, maxdec){
     if(qpava$conv==0) conv="not converged"    
   }else{
     dist=1;  beta=0;  iter=0;    
-    q2=q-c(H.diam)*beta    
+    q2=q-c(H.diam)*beta
     
     while(dist>eps){
       iter=iter+1
@@ -82,7 +82,7 @@ uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxiter, eps, maxdec){
       #profiling algorithm with excluding 1% 
       
       #(b) beta.new (p=1)
-      beta.new=c( 1/H.circ * (q.circ+ psi.new%*%H.diam) )
+      beta.new=c( 1/H.circ * (q.circ - t(H.diam)%*%psi.new) )
       
       #(c) update psi and beta
       dist=sum(abs(psi.new-psi))+abs(beta.new-beta)

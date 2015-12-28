@@ -1,6 +1,6 @@
 \name{uniah}
 \alias{uniah}
-\title{Plot Univariate Additive Hazards Model}
+\title{Fit Unimodal Additive Hazards Model}
 \description{Nonparametric estimation of a unimodal or U-shape covariate effect for additive hazard model.}
 \usage{
 uniah(formula, x, data, shape, mode, M, maxiter, eps, maxdec)
@@ -17,7 +17,7 @@ uniah(formula, x, data, shape, mode, M, maxiter, eps, maxdec)
   \item{maxdec}{maximum number of decisimal for output (default is 3).}
 }
 \details{The uniah function allows to analyze shape restricted additive hazards model, defined as
-\deqn{ \lambda(t|z)=\lambda0(t)+\psi(z)+\beta x, }
+\deqn{ \lambda(t|z,x)=\lambda0(t)+\psi(z)+\beta x, }
 where \eqn{ \lambda0 } is a baseline hazard function, and \eqn{ \psi } is a unimodal or ushaped function, \eqn{z} is a univariate covariate, \eqn{\beta} is a regression parameter and \eqn{x} is a binary covariate. One point at mode is fixed with \eqn{ \psi(M)=0 }. For known mode, \eqn{M} has to be prespecified. For unknown mode, \eqn{M} does not have to be fixed. A direction of \eqn{ \psi } is defined as unimodal or ushape prior to data analysis. Monotone covariate effects are also considered by setting a mode to the left or right end point of \eqn{Z}. Quadratic pool adjacent violators algorithm is used.
 }
 \references{Yunro Chung, Anastasia Ivanova, Michael M. Hudgens, Jason P. Fine, Shape restricted addtive hazards model (in preparation).}
