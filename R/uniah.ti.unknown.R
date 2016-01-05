@@ -1,4 +1,4 @@
-uniah.ti.unknown=function(TIME, STATUS, Z, X, shape, maxiter, eps, maxdec){  
+uniah.ti.unknown=function(TIME, STATUS, Z, X, shape, maxdec, maxiter, eps){  
   null.x=0
   if(is.null(X)) null.x=1
   
@@ -58,11 +58,10 @@ uniah.ti.unknown=function(TIME, STATUS, Z, X, shape, maxiter, eps, maxdec){
   }else{;                  qpava.ft=qpava.ushape.ft;  }
 
   conv="not converged"
-  
   h=diag(H)
   H2=H; diag(H2)=0  
   
-  if(null.x==1){
+  if(null.x==1){ #no treatment group
     beta=NA
     for(k in 1:m){
       qpava=qpava.ft(psi.list0[[k]],z.obs,H2,h,q, m,k,eps,maxiter)
@@ -70,7 +69,9 @@ uniah.ti.unknown=function(TIME, STATUS, Z, X, shape, maxiter, eps, maxdec){
       conv.list[[k]]=qpava$conv
     }
     conv.sum=sum(conv.list)
-    if(conv.sum==0) stop("Algorithms were not converged.")      
+    if(conv.sum==0){ stop("Algorithms were not converged.")      
+    }else{ conv="converged"
+    }
     
     #profiling algorithm with excluding 1% 
     prof=profiling.ft(m,H,q,psi.list,conv.list)

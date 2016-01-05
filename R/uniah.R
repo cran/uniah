@@ -1,4 +1,4 @@
-uniah=function(formula, x=NULL, data=NULL, shape='unimodal', mode='unknown', M=NULL, maxiter=10^3, eps=10^-3, maxdec=3){
+uniah=function(formula, trt=NULL, data=NULL, shape='unimodal', mode='unknown', M=NULL, maxdec=3, maxiter=10^3, eps=10^-3){
   #1. load/check R packages
   
   #2. check input parameters
@@ -104,16 +104,16 @@ uniah=function(formula, x=NULL, data=NULL, shape='unimodal', mode='unknown', M=N
   }
   
   #3.5 X
-  if(!is.null(data))    x=data$x
+  if(!is.null(data))    trt=data$trt
   if(type=='ti'){
-    if(!is.null(x)){
-      if( any(is.na(x)) ) stop("x included NA")
-      if( any(is.infinite(x)) ) stop("x included NA")
+    if(!is.null(trt)){
+      if( any(is.na(trt)) ) stop("trt included NA")
+      if( any(is.infinite(trt)) ) stop("trt included NA")
       
-      uniq.x=unique(x)
-      if(length(uniq.x)!=2)  stop("x must be coded by 0 and 1")
-      if(min(uniq.x)!=0)       stop("x must be coded by 0 and 1")
-      if(max(uniq.x)!=1)       stop("x must be coded by 0 and 1")
+      uniq.trt=unique(trt)
+      if(length(uniq.trt)!=2)  stop("trt must be coded by 0 and 1")
+      if(min(uniq.trt)!=0)       stop("trt must be coded by 0 and 1")
+      if(max(uniq.trt)!=1)       stop("trt must be coded by 0 and 1")
     }
   }else if(type=='td'){
   }
@@ -128,12 +128,12 @@ uniah=function(formula, x=NULL, data=NULL, shape='unimodal', mode='unknown', M=N
   #4. uniah
   if(type=='ti'){
     if(mode=='known'){
-      est=uniah.ti.known(TIME=TIME, STATUS=STATUS, Z=Z, X=x, shape=shape, K=M, maxiter=maxiter, eps=eps, maxdec=maxdec)
+      est=uniah.ti.known(TIME=TIME, STATUS=STATUS, Z=Z, X=trt, shape=shape, K=M, maxdec=maxdec, maxiter=maxiter, eps=eps)
     }else if(mode=='unknown'){
-      est=uniah.ti.unknown(TIME=TIME, STATUS=STATUS, Z=Z, X=x, shape=shape, maxiter=maxiter, eps=eps, maxdec=maxdec)
+      est=uniah.ti.unknown(TIME=TIME, STATUS=STATUS, Z=Z, X=trt, shape=shape, maxdec=maxdec, maxiter=maxiter, eps=eps)
     }
   }else if(type=='td'){
-    stop("interval data is not supported for the current version of the uniah function")
+    stop("interval data (ot time-dependent covariate) is not supported for the current version of the uniah function")
   }
 
   est$call=match.call()

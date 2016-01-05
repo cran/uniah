@@ -1,4 +1,4 @@
-uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxiter, eps, maxdec){  
+uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxdec, maxiter, eps){  
   null.x=0
   if(is.null(X)) null.x=1
   
@@ -53,18 +53,18 @@ uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxiter, eps, maxdec){
   
   if(shape=="unimodal"){;  qpava.ft=qpava.unimodal.ft
   }else{;                  qpava.ft=qpava.ushape.ft;  }
-  conv="not converged"
-  
+
   h=diag(H)
   H2=H; diag(H2)=0  
 
-  if(null.x==1){
+  if(null.x==1){ #no treatment effect
     beta=NA
     qpava=qpava.ft(psi,z.obs,H2,h,q, m,k,eps,maxiter)
     psi.new=qpava$psi.new
-    conv=qpava$conv
+    conv="converged"
     if(qpava$conv==0) conv="not converged"    
   }else{
+    conv="not converged"
     dist=1;  beta=0;  iter=0;    
     q2=q-c(H.diam)*beta
     

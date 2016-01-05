@@ -3,22 +3,22 @@
 \title{Fit Unimodal Additive Hazards Model}
 \description{Nonparametric estimation of a unimodal or U-shape covariate effect for additive hazard model.}
 \usage{
-uniah(formula, x, data, shape, mode, M, maxiter, eps, maxdec)
+uniah(formula, trt, data, shape, mode, M, maxdec, maxiter, eps)
 }
 \arguments{
-  \item{formula}{a formula object: a response ~ a univariate covariate. The response must be survival outcome unsing the Surv function. For interval data, each subject's starting time must be set to 0.}
-  \item{x}{Treatment group. It must be coded by 0 or 1. This argument is an optional (default is NULL)}
+  \item{formula}{a formula object: a response ~ a univariate covariate. The response must be survival outcome unsing the Surv function.}
+  \item{trt}{Treatment group. It must be coded by 0 or 1. This argument is optional.}
   \item{data}{data.frame or list that includes variables named in the formula argument.}
   \item{shape}{direction of the covariate effect on the hazard function, "unimodal" or "ushape"}
-  \item{mode}{mode of the unimodal or ushape hazard function, "known" or "unknown"}
+  \item{mode}{mode of the unimodal or ushape hazard function, "known" or "unknown" (default is "unknown").}
   \item{M}{A value for mode, which is only requred when mode="known".}
+  \item{maxdec}{maximum number of decisimal for output (default is 3).}
   \item{maxiter}{maximum number of iteration (default is 10^3).}
   \item{eps}{stopping convergence criteria (default is 10^-3).}
-  \item{maxdec}{maximum number of decisimal for output (default is 3).}
 }
 \details{The uniah function allows to analyze shape restricted additive hazards model, defined as
-\deqn{ \lambda(t|z,x)=\lambda0(t)+\psi(z)+\beta x, }
-where \eqn{ \lambda0 } is a baseline hazard function, and \eqn{ \psi } is a unimodal or ushaped function, \eqn{z} is a univariate covariate, \eqn{\beta} is a regression parameter and \eqn{x} is a binary covariate. One point at mode is fixed with \eqn{ \psi(M)=0 }. For known mode, \eqn{M} has to be prespecified. For unknown mode, \eqn{M} does not have to be fixed. A direction of \eqn{ \psi } is defined as unimodal or ushape prior to data analysis. Monotone covariate effects are also considered by setting a mode to the left or right end point of \eqn{Z}. Quadratic pool adjacent violators algorithm is used.
+\deqn{ \lambda(t|z,trt)=\lambda0(t)+\psi(z)+\beta trt, }
+where \eqn{ \lambda0 } is a baseline hazard function, and \eqn{ \psi } is a unimodal or ushaped function, \eqn{z} is a univariate variable, \eqn{\beta} is a regression parameter and \eqn{trt} is a binary treatment group variable. One point at mode is fixed with \eqn{ \psi(M)=0 }. For known mode, \eqn{M} has to be prespecified. For unknown mode, \eqn{M} does not have to be fixed. A direction of \eqn{ \psi } is defined as unimodal or ushape prior to data analysis. Monotone covariate effects are also considered by setting a mode to the left or right end point of \eqn{Z}. Quadratic pool adjacent violators algorithm is used.
 }
 \references{Yunro Chung, Anastasia Ivanova, Michael M. Hudgens, Jason P. Fine, Shape restricted addtive hazards model (in preparation).}
 \author{Yunro Chung [cre], Anastasia Ivanova, Michael G. Hudgens and Jason P. Fine}
@@ -55,11 +55,11 @@ test1=list(
   time=  c(2, 7, 3, 7, 8, 1, 2, 2, 9, 8),
   status=c(1, 0, 1, 1, 1, 0, 0, 1, 1, 0),
   z=     c(4, 9, 5, 5, 1, 3, 8, 8, 1, 2),
-  x=     c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0)
+  trt=   c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0)
 )
 
 # 2.2. Fit isotonic proportional hazards model
-res2=uniah(Surv(time,status)~z, x=x, data=test1, shape='unimodal', mode='known', M=6)
+res2=uniah(Surv(time,status)~z, trt=trt, data=test1, shape='unimodal', mode='known', M=6)
 
 # 2.3. print result
 res2

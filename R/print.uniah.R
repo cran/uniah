@@ -24,9 +24,9 @@ print.uniah=function(x, ...){
   cat(a1.4)  
   
   if(x$conv=="converged"){
-    a2=paste("\n\nAlgorithm was ",x$conv, ".",sep='')
+    a2=paste("\n\nAlgorithm was ",x$conv, ".\n",sep='')
   }else{
-    a2=paste("\n\nAlgorithm was ",x$conv,". Results were questinable.",sep='')
+    a2=paste("\n\nAlgorithm was ",x$conv,". Results were questinable.\n",sep='')
   }
   cat(a2)
   
