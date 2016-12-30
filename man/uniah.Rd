@@ -90,10 +90,10 @@ plot(res3)
 # 4. More arguments for plot.uniah (S3method)
 ###
 # 4.1 renames labels
-plot(res3, main="Ush", ylab="RD", xlab="Cov", lglab="Cov wt obs", lgloc="center", lgcex=1.5)
+#plot(res3, main="Ush", ylab="RD", xlab="Cov", lglab="Cov wt obs", lgloc="center", lgcex=1.5)
 
 # 4.2 removes labels and changes line and point parameters
-plot(res3, main=NA, ylab=NA, xlab=NA, lglab=NA, lty=2, lcol=2, lwd=2, pch=3, pcol=4, pcex=1.5)
+#plot(res3, main=NA, ylab=NA, xlab=NA, lglab=NA, lty=2, lcol=2, lwd=2, pch=3, pcol=4, pcex=1.5)
 
 }
 \keyword{Unimodal regression, Survival analysis, Constrained estimation}
