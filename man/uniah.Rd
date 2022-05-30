@@ -18,16 +18,22 @@ uniah(formula, trt, data, shape, mode, M, maxdec, maxiter, eps)
 }
 \details{The uniah function allows to analyze shape restricted additive hazards model, defined as
 \deqn{ \lambda(t|z,trt)=\lambda0(t)+\psi(z)+\beta trt, }
-where \eqn{ \lambda0 } is a baseline hazard function, and \eqn{ \psi } is a unimodal or ushaped function, \eqn{z} is a univariate variable, \eqn{\beta} is a regression parameter and \eqn{trt} is a binary treatment group variable. One point at mode is fixed with \eqn{ \psi(M)=0 }. For known mode, \eqn{M} has to be prespecified. For unknown mode, \eqn{M} does not have to be fixed. A direction of \eqn{ \psi } is defined as unimodal or ushape prior to data analysis. Monotone covariate effects are also considered by setting a mode to the left or right end point of \eqn{Z}. Quadratic pool adjacent violators algorithm is used.
+where \eqn{ \lambda0 } is a baseline hazard function, \eqn{ \psi } is a unimodal or U-shaped function, \eqn{z} is a univariate variable, \eqn{\beta} is a regression parameter, and \eqn{trt} is a binary treatment group variable. One point at mode has to be fixed with \eqn{ \psi(M)=0 } for model identifiability. For known mode (mode="known"), \eqn{M} has to be prespecified, and (\eqn{ \psi, \beta}) is estimated given the prespecified \eqn{M}. For unknown mode (mode="unknown"), \eqn{M} is not needed, and  (\eqn{ \psi , \beta, M}) is estimated by profiling all hypothetical modes. A direction of \eqn{ \psi } is defined as unimodal or ushape prior to data analysis. Monotone covariate effects are also considered by setting a mode to the left or right end point of \eqn{Z}.
 }
-\references{Yunro Chung, Anastasia Ivanova, Michael M. Hudgens, Jason P. Fine, Shape restricted addtive hazards model (in preparation).}
-\author{Yunro Chung [cre], Anastasia Ivanova, Michael G. Hudgens and Jason P. Fine}
+\value{A list of class isoph:
+\item{est}{results.}
+\item{psi}{estimated \eqn{\psi} at z}
+\item{beta}{estimated \eqn{\beta}.}
+\item{conv}{algorithm convergence status.}
+\item{M}{Predetermined model if mode="known" or estimated mode if mode="unknown".}
+\item{shape}{Direction of \eqn{\psi}.}
+\item{call}{Specified arguments that are specified in the model.}
+}
+
+\references{Yunro Chung, Anastasia Ivanova, Jason P. Fine, Shape restricted addtive hazards model (in preparation).}
+\author{Yunro Chung [aut, cre]}
 
 \examples{
-#require(Iso)
-#require(survival)
-#require(ahaz)
-
 ###
 # 1. unimodal with known mode
 ###
@@ -51,7 +57,7 @@ plot(res1)
 # 2. unimodal with known mode with treatment group
 ###
 # 2.1. create a test data set 1
-test1=list(
+test2=list(
   time=  c(2, 7, 3, 7, 8, 1, 2, 2, 9, 8),
   status=c(1, 0, 1, 1, 1, 0, 0, 1, 1, 0),
   z=     c(4, 9, 5, 5, 1, 3, 8, 8, 1, 2),
@@ -59,7 +65,7 @@ test1=list(
 )
 
 # 2.2. Fit isotonic proportional hazards model
-res2=uniah(Surv(time,status)~z, trt=trt, data=test1, shape='unimodal', mode='known', M=6)
+res2=uniah(Surv(time,status)~z, trt=trt, data=test2, shape='unimodal', mode='known', M=6)
 
 # 2.3. print result
 res2
@@ -87,13 +93,11 @@ res3
 plot(res3)
 
 ###
-# 4. More arguments for plot.uniah (S3method)
+# 4. More arguments for plot.uniah
 ###
 # 4.1 renames labels
 #plot(res3, main="Ush", ylab="RD", xlab="Cov", lglab="Cov wt obs", lgloc="center", lgcex=1.5)
 
 # 4.2 removes labels and changes line and point parameters
 #plot(res3, main=NA, ylab=NA, xlab=NA, lglab=NA, lty=2, lcol=2, lwd=2, pch=3, pcol=4, pcex=1.5)
-
 }
-\keyword{Unimodal regression, Survival analysis, Constrained estimation}

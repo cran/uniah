@@ -131,7 +131,9 @@ uniah.ti.known=function(TIME, STATUS, Z, X, shape, K, maxdec, maxiter, eps){
   #for plot
   psi.obs=c(psi.obs[1],psi.obs,psi.obs[m])
   z.obs=c(min(z),z.obs,max(z))  
-
+  psi=data.frame(psi=psi.obs, z=z.obs)
+  
   #return(list(est=est, conv=conv, psi=psi.obs, z=z.obs, M=K, shape=shape, iter=iter, dist=dist, n=n, nevent=sum(STATUS), njump=m))
-  return(list(est=est, beta=beta, conv=conv, psi=psi.obs, z=z.obs, M=K, shape=shape, n=n, nevent=sum(STATUS), njump=m))
+  #return(list(est=est, beta=beta, conv=conv, psi=psi.obs, z=z.obs, M=K, shape=shape, n=n, nevent=sum(STATUS), njump=m))
+  return(list(est=est, beta=beta, psi=psi, conv=conv, M=K, shape=shape))
 }

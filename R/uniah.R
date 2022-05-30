@@ -1,6 +1,4 @@
 uniah=function(formula, trt=NULL, data=NULL, shape='unimodal', mode='unknown', M=NULL, maxdec=3, maxiter=10^3, eps=10^-3){
-  #1. load/check R packages
-  
   #2. check input parameters
   #2.1. Null
   if( is.null(formula) )  stop("formular is requred")
@@ -20,24 +18,21 @@ uniah=function(formula, trt=NULL, data=NULL, shape='unimodal', mode='unknown', M
   if( (is.na(maxiter)||is.infinite(maxiter)) )  stop("maxiter must be a finite value")
 
   #2.4 class
-  if(class(formula)!='formula') stop("formula argument is wrong")
-
-  if(class(shape)!='character') stop("shape must be character")
-  if(any(grep("uni",tolower(shape)))==TRUE){
+  shape=tolower(shape)
+  if(any(grep("uni",shape))==TRUE){
     shape="unimodal"
-  }else if(any(grep("ush",tolower(shape)))==TRUE){
+  }else if(any(grep("ush",shape))==TRUE){
     shape="ushape"
-  }else if(any(grep("u-sh",tolower(shape)))==TRUE){
+  }else if(any(grep("u-sh",shape))==TRUE){
     shape="ushape"
   }
   if(shape!='unimodal' && shape!='ushape')
     stop("shape must be either unimodal or ushape")
 
-  if(class(mode)!='character') stop("mode must be character")
-  
-  if(any(grep("unk",tolower(mode)))==TRUE){
+  mode=tolower(mode)
+  if(any(grep("unk",mode))==TRUE){
     mode="unknown"
-  }else if(any(grep("uk",tolower(mode)))==TRUE){
+  }else if(any(grep("uk",mode))==TRUE){
     mode="unknown"    
   }
   if(mode!='known' && mode!='unknown')
@@ -137,7 +132,7 @@ uniah=function(formula, trt=NULL, data=NULL, shape='unimodal', mode='unknown', M
   }
 
   est$call=match.call()
-  est$formula=formula
+  #est$formula=formula
   
   class(est)="uniah"
   
