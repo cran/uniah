@@ -7,8 +7,8 @@
 \tabular{ll}{
 Package: \tab uniah\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2022-05-27\cr
+Version: \tab 1.2\cr
+Date: \tab 2024-01-20\cr
 License: \tab GPL (>= 2)\cr
 }
 }

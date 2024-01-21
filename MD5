@@ -1,13 +1,13 @@
-5420b37f87c098f653ed74d2c966d4d6 *DESCRIPTION
+472f3275fcb36568fd9e35fc46c9e36b *DESCRIPTION
 3cf8ded390127ec11c92068ee621f496 *NAMESPACE
 722cbe5382e9318018fdcc9832e84600 *R/drvt.Hq.ti.R
 db80c44dafb090b63766508539b1002e *R/initial.R
-8bbb9f31a0bf5dc422fd639f56ad9306 *R/plot.uniah.R
+d06dd462b30783747f1f59eb1f65d2d5 *R/plot.uniah.R
 df7ed3e28a1a6cf47e075aad16e1a52e *R/print.uniah.R
 dd3f95b796f17d1c9bc1b3b70e03129d *R/profiling.R
 49bd0ee10237dd85a081a7c34e0fa892 *R/qpava.R
 919bed297fe4f0938677f5c87f655596 *R/uniah.R
 fcf08f3a2819c9bfadcdbdffe0f79d9b *R/uniah.ti.known.R
 11e721cfd7262a8482d29f02313c816d *R/uniah.ti.unknown.R
-5f931f4ce2df5f42b430059066b2d4fe *man/uniah-package.Rd
+e4fc299afca4136a2d5251adaea49977 *man/uniah-package.Rd
 81d7558159d3101de13677a2b0974aa7 *man/uniah.Rd
